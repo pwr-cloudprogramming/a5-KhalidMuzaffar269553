@@ -1,39 +1,13 @@
-# Jane Doe - Terraform, EC2, TicTacToe report
+[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-718a45dd9cf7e7f842a935f5ebbe5719a5e09af4491e668f4dbf3b35d5cca122.svg)](https://classroom.github.com/online_ide?assignment_repo_id=14253646&assignment_repo_type=AssignmentRepo)
+# Template repo for Cloud Programming
 
-- Course: *Cloud programming*
-- Group: group no.3 
-- Date: 22-04-2024
+This repository contains folders and placeholder files to keep the structure of CP assignments.
 
-## Environment architecture
+When you submit your solution to GitHub, put:
 
-This project involves setting up a cloud-based infrastructure to host a Tic Tac Toe web application. The infrastructure is created using Terraform and consists of a Virtual Private Cloud (VPC) with associated resources such as subnets, an internet gateway, and routing tables. The web application is deployed on an AWS EC2 instance which is provisioned with Docker for containerization of the frontend and backend services.
+- frontend application files into `/frontend/src`
+- backend application files into `/backend/src`
+- Dockerfile to build frontend container image into `/frontend`
+- Dockerfile to build backend container image into `/backend`
+- all other scripts to build your solution into `/build`
 
-**Key Components:**
-
-- **VPC:** Custom Virtual Private Cloud to securely host our application resources.
-- **Security Group:** Configured to allow SSH, HTTP, and custom application port traffic.
-- **EC2 Instance:** AWS compute service where the application is hosted, with Docker installed.
-- **Docker:** Used for containerization of the application's frontend and backend.
-- **Terraform:** IaC tool used to define and provision the AWS infrastructure.
-
-## Preview
-
-Screenshots of configured AWS services. Screenshots of your application running.
-
-![Sample image](img/sample-image.png)
-
-## Reflections
-
-- What did you learn?
-Infrastructure as Code (IaC) using Terraform.
-AWS cloud services including VPC, EC2, Internet Gateway, and Security Groups.
-Containerization with Docker and orchestration using Docker Compose.
-Deploying a full-stack web application in a cloud environment.
-- What obstacles did you overcome?
-Configuring Terraform to correctly provision all the necessary AWS resources.
-Managing Docker containers and networking for seamless communication between the frontend and backend.
-- What did you help most in overcoming obstacles?
-Our previous labs
-AWS documentation provided guidance on VPC and EC2 setup.
-- Was that something that surprised you?
-The ease with which Terraform allows for spinning up an entire cloud-based infrastructure.
