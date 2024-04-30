@@ -87,12 +87,12 @@ resource "aws_security_group" "my_sg" {
 
 # EC2 Instance Configuration
 resource "aws_instance" "my_instance" {
-  ami                    = "ami-080e1f13689e07408"  # Ensure this is updated
+  ami                    = "ami-080e1f13689e07408"  
   instance_type          = "t2.micro"
   subnet_id              = aws_subnet.my_subnet.id
   vpc_security_group_ids = [aws_security_group.my_sg.id]
   associate_public_ip_address = true
-  key_name               = "vockey"  # Specify your key name here
+  key_name               = "vockey"  
 
   user_data = <<-EOF
     #!/bin/bash
