@@ -96,12 +96,13 @@ resource "aws_instance" "my_instance" {
 
   user_data = <<-EOF
     #!/bin/bash
-    sudo apt update
-    sudo apt install -y docker.io docker-compose
-    sudo systemctl start docker
-    sudo systemctl enable docker
-    git clone https://github.com/pwr-cloudprogramming/a1-KhalidMuzaffar269553.git /home/ubuntu/app
-    cd /home/ubuntu/app
+    apt update
+    apt install -y docker.io docker-compose
+    systemctl start docker
+    systemctl enable docker
+    su - ubuntu 
+    cd ~/home/ubuntu/app
+    git clone https://github.com/pwr-cloudprogramming/a1-KhalidMuzaffar269553.git 
     sudo docker compose up -d
   EOF
 
