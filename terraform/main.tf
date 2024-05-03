@@ -30,6 +30,8 @@ resource "aws_subnet" "tictactoe_subnet" {
 
   tags = {
     Name = "TicTacToeSubnet"
+    Terraform   = "true"
+    Environment = "dev"
   }
 }
 
@@ -85,27 +87,53 @@ resource "aws_vpc_security_group_ingress_rule" "allow_ssh" {
 }
 
 
-resource "aws_instance" "my_instance" {
-  ami                    = "ami-080e1f13689e07408"  
-  instance_type          = "t2.micro"
-  subnet_id              = aws_subnet.my_subnet.id
-  vpc_security_group_ids = [aws_security_group.my_sg.id]
-  associate_public_ip_address = true
-  key_name               = "vockey"  
+resource "aws_instance" "tictactoe_instance" {
+  ami = "ami-080e1f13689e07408"
+  instance_type = "t2.micro"
+  key_name = "vockey"
+  subnet_id = aws_subnet.tictactoe_subnet.id
+  associate_public_ip_address = "true"
+  vpc_security_group_ids = [aws_security_group.allow_ssh_http.id]
 
   user_data = <<-EOF
     #!/bin/bash
-    apt update
-    apt install -y docker.io docker-compose
-    systemctl start docker
-    systemctl enable docker
-    su - ubuntu 
-    cd ~/home/ubuntu/app
-    git clone https://github.com/pwr-cloudprogramming/a1-KhalidMuzaffar269553.git 
-    sudo docker compose up -d
+              sudo apt-get update
+              sudo apt-get install docker.io -y
+            
+              
+              
+              sudo systemctl start docker
+              sudo systemctl enable docker
+              
+              sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+              sudo chmod +x /usr/local/bin/docker-compose
+              
+              sudo usermod -a -G docker $(whoami)
+              sudo usermod -aG docker ubuntu
+              newgrp docker
+             
+            
+              
+              cd /home/ubuntu
+    
+              git clone https://github.com/pwr-cloudprogramming/a1-KhalidMuzaffar269553.git
+              
+              cd /home/ubuntu
+    
+              cd a1-KhalidMuzaffar269553
+    
+              docker-compose up -d
   EOF
+  
+  user_data_replace_on_change = true
 
   tags = {
     Name = "MyTicTacInstance"
   }
+  
+
+
+}
+output "public_ip" {
+  value = aws_instance.tictactoe_instance.public_ip
 }
